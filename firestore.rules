@@ -1,0 +1,40 @@
+// firestore.rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Aturan untuk koleksi 'posts'
+    match /posts/{postId} {
+      // Semua orang (termasuk yang tidak login) bisa membaca postingan
+      allow read: if true;
+
+      // Hanya pengguna yang terautentikasi (sudah login) yang bisa membuat postingan baru
+      allow create: if request.auth != null;
+
+      // Hanya penulis postingan (request.auth.uid) yang bisa mengupdate atau menghapus postingannya sendiri
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+
+    // Aturan untuk koleksi 'comments'
+    match /comments/{commentId} {
+      // Semua orang bisa membaca komentar
+      allow read: if true;
+
+      // Hanya pengguna yang terautentikasi yang bisa membuat komentar baru
+      allow create: if request.auth != null;
+
+      // (Opsional) Hanya penulis komentar yang bisa update atau menghapus komentarnya
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+    }
+
+    // Aturan untuk koleksi 'users' (profil user)
+    // Ini adalah opsional jika Anda menyimpan data profil tambahan
+    match /users/{userId} {
+      // Siapa saja bisa membaca profil user (sesuaikan jika perlu privasi)
+      allow read: if true;
+      // Hanya user yang terautentikasi dan ID-nya cocok dengan dokumen yang bisa membuat/mengupdate
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+      // Tidak ada izin delete untuk profil user
+    }
+  }
+}
