@@ -5,7 +5,7 @@
       <router-view />
     </main>
     <footer>
-      <p>Dibuat oleh <a href="https://github.com/yusrantabrani" target="_blank" rel="noopener noreferrer">Yusran Tabrani</a> &amp; Gemini AI</p>
+      <p>Dibuat oleh <a href="https://github.com/feelfool" target="_blank" rel="noopener noreferrer">Yusran Tabrani</a> &amp; Gemini AI</p>
     </footer>
   </div>
 </template>

@@ -40,8 +40,8 @@
           </div>
 
           <router-link to="/forum" class="mobile-nav-item" @click="closeMobileMenu">Forum</router-link>
-          <router-link v-if="user" to="/NewPost.vue" class="mobile-nav-item" @click="closeMobileMenu">Buat Postingan</router-link>
-          <router-link v-if="user" to="/my-posts" class="mobile-nav-item" @click="closeMobileMenu">Postingan Saya</router-link>
+         <router-link v-if="user" to="/post/new" class="nav-item" @click="closeMobileMenu">Buat Postingan</router-link>
+        <router-link v-if="user" to="/my-posts" class="nav-item" @click="closeMobileMenu">Postingan Saya</router-link>
           <div class="mobile-auth-buttons">
             <button v-if="!user" @click="goToLogin" class="btn btn-login">Login</button>
             <button v-if="!user" @click="goToRegister" class="btn btn-register">Daftar</button>
